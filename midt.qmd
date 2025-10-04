@@ -7,7 +7,7 @@ format:
     html:
         embed-resources: true
 ---
- # Problema de Regresión
+# Problema de Regresión
 
 Caso de estudio, instituciones educativas y numero de estudiantes
 
@@ -149,8 +149,6 @@ histograma = alt.Chart(df_errores).mark_bar().encode(
     height=300,
     title='Distribución de Errores'
 )
-
-
 ```
 
 

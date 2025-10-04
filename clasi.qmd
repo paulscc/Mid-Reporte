@@ -105,7 +105,6 @@ for i, feat in enumerate(features, 1):
 
 
 ```{python}
-# 4. PREPARAR DATOS
 datos_validos = df[df['tiene_costo'].notna()]
 df_model = datos_validos[features + ['tiene_costo']].copy()
 
@@ -183,7 +182,6 @@ y_pred_test = pipe.predict(X_test)
 
 ```{python}
 
-# 9. EVALUACIÓN - TRAIN
 print("="*70)
 print("RESULTADOS - CONJUNTO DE ENTRENAMIENTO")
 print("="*70)
@@ -272,3 +270,61 @@ plt.show()
 
 
 ```
+
+
+
+```{python}
+from sklearn.metrics import roc_curve, auc
+
+
+# Obtener probabilidades para la curva ROC
+y_proba_test = pipe.predict_proba(X_test)[:, 1]
+
+# Calcular curva ROC
+fpr, tpr, thresholds = roc_curve(y_test, y_proba_test)
+roc_auc = auc(fpr, tpr)
+
+
+fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+# GRÁFICA 1: Distribución de clases
+ax1 = axes[0]
+clases = ['Gratis (0)', 'Con Costo (1)']
+valores = [dist.get(0, 0), dist.get(1, 0)]
+colores = ['#3498db', '#e74c3c']
+
+bars = ax1.bar(clases, valores, color=colores, alpha=0.7, edgecolor='black', linewidth=1.5)
+ax1.set_ylabel('Cantidad de Canchas', fontsize=11, fontweight='bold')
+ax1.set_title('Distribución de Clases en el Dataset', fontsize=12, fontweight='bold')
+ax1.grid(axis='y', alpha=0.3, linestyle='--')
+
+# Agregar valores en las barras
+for bar, val in zip(bars, valores):
+    height = bar.get_height()
+    ax1.text(bar.get_x() + bar.get_width()/2., height,
+            f'{val}\n({val/total*100:.1f}%)',
+            ha='center', va='bottom', fontsize=10, fontweight='bold')
+
+# Agregar línea de desbalanceo
+ratio = dist.get(0, 0) / dist.get(1, 0)
+ax1.text(0.5, max(valores)*0.9, f'Ratio de desbalanceo: {ratio:.1f}:1', 
+         ha='center', fontsize=10, style='italic',
+         bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
+
+# GRÁFICA 2: Curva ROC
+ax2 = axes[1]
+ax2.plot(fpr, tpr, color='#2ecc71', linewidth=2, label=f'ROC (AUC = {roc_auc:.3f})')
+ax2.plot([0, 1], [0, 1], color='gray', linestyle='--', linewidth=1.5, label='Azar (AUC = 0.500)')
+ax2.set_xlim([0.0, 1.0])
+ax2.set_ylim([0.0, 1.05])
+ax2.set_xlabel('Tasa de Falsos Positivos (FPR)', fontsize=11, fontweight='bold')
+ax2.set_ylabel('Tasa de Verdaderos Positivos (TPR)', fontsize=11, fontweight='bold')
+ax2.set_title('Curva ROC - Regresión Logística', fontsize=12, fontweight='bold')
+ax2.legend(loc='lower right', fontsize=10)
+ax2.grid(alpha=0.3, linestyle='--')
+
+# Sombrear área bajo la curva
+ax2.fill_between(fpr, tpr, alpha=0.2, color='#2ecc71')
+
+```
+
+### Se puede observar como la canchas publicas tienen al mayor cantidad a diferencia de canchas con costo; los resultados reflejan la realidad. 
