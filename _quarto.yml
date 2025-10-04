@@ -1,0 +1,31 @@
+project:
+  type: website
+  output-dir: docs
+  preview:
+    watch-inputs: true
+
+website:
+  title: "Machine Learning Semana 2"
+  navbar:
+    left:
+      - href: midt.qmd
+        text: Regresion
+      - href: clasi.qmd
+        text: Clasificacion
+      
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-fold: true
+    fig-align: center
+    df-print: paged
+
+jupyter:
+  kernelspec:
+    name: ml1
+    language: python
+    display_name: "Python (ml1)"
+
+

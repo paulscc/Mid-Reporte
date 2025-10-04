@@ -1,0 +1,100 @@
+[
+  {
+    "objectID": "clasi.html",
+    "href": "clasi.html",
+    "title": "Midterm 2",
+    "section": "",
+    "text": "Code\nimport pandas as pd\nimport numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, ConfusionMatrixDisplay, classification_report\nfrom sklearn.preprocessing import LabelEncoder\nimport matplotlib.pyplot as plt\nimport warnings\nwarnings.filterwarnings('ignore')"
+  },
+  {
+    "objectID": "clasi.html#carga-de-dataset",
+    "href": "clasi.html#carga-de-dataset",
+    "title": "Midterm 2",
+    "section": "Carga de dataset",
+    "text": "Carga de dataset\n\n\nCode\n# 1. CARGAR DATASET\nprint(\"=\"*70)\nprint(\"CLASIFICACIÓN DE CANCHAS - REGRESIÓN LOGÍSTICA\")\nprint(\"=\"*70)\n\ntry:\n    df = pd.read_csv('canchas.csv', sep=';', encoding='utf-8-sig')\nexcept:\n    df = pd.read_csv('canchas.csv', sep=';', encoding='latin-1')\n\ndf.columns = df.columns.str.strip().str.replace('ï»¿', '')\ndf = df.loc[:, df.columns != '']\ndf = df.loc[:, ~df.columns.str.match('^Unnamed')]\n\nprint(f\"Total de registros: {len(df)}\")\n\n\n======================================================================\nCLASIFICACIÓN DE CANCHAS - REGRESIÓN LOGÍSTICA\n======================================================================\nTotal de registros: 147"
+  },
+  {
+    "objectID": "clasi.html#variable-objetivo",
+    "href": "clasi.html#variable-objetivo",
+    "title": "Midterm 2",
+    "section": "Variable objetivo",
+    "text": "Variable objetivo\n\n\nCode\n# 2. VARIABLE OBJETIVO\ncosto_col = 'Costo por uso de las instalaciones'\ndf[costo_col] = pd.to_numeric(df[costo_col], errors='coerce')\ndf['tiene_costo'] = (df[costo_col] &gt; 0).astype(int)\n\nprint(\"\\n\" + \"=\"*70)\nprint(\"DISTRIBUCIÓN DE CLASES\")\nprint(\"=\"*70)\ndist = df['tiene_costo'].value_counts().sort_index()\ntotal = dist.sum()\nprint(f\"Gratis (0):    {dist.get(0, 0):3d} canchas ({dist.get(0, 0)/total*100:5.2f}%)\")\nprint(f\"Con costo (1): {dist.get(1, 0):3d} canchas ({dist.get(1, 0)/total*100:5.2f}%)\")\nprint(f\"\\nDesbalanceo de clases: {dist.get(0, 0)/dist.get(1, 0):.2f}:1\")\n\n\n\n======================================================================\nDISTRIBUCIÓN DE CLASES\n======================================================================\nGratis (0):    133 canchas (90.48%)\nCon costo (1):  14 canchas ( 9.52%)\n\nDesbalanceo de clases: 9.50:1"
+  },
+  {
+    "objectID": "clasi.html#seleccion-de-features",
+    "href": "clasi.html#seleccion-de-features",
+    "title": "Midterm 2",
+    "section": "Seleccion de features",
+    "text": "Seleccion de features\n\n\nCode\n# 3. SELECCIONAR FEATURES\nfeatures_map = {\n    'zonal': None, 'provincia': None, 'canton': None, 'estado': None,\n    'cubierta': None, 'propiedad': None, 'uso': None\n}\n\nfor col in df.columns:\n    col_norm = col.lower().replace('á', 'a').replace('é', 'e').replace('í', 'i').replace('ó', 'o').replace('ú', 'u')\n    if 'zonal' in col_norm or 'coordinacion' in col_norm:\n        features_map['zonal'] = col\n    elif 'provincia' in col_norm:\n        features_map['provincia'] = col\n    elif 'canton' in col_norm:\n        features_map['canton'] = col\n    elif 'estado' in col_norm:\n        features_map['estado'] = col\n    elif 'cubierta' in col_norm or 'caracteristica' in col_norm:\n        features_map['cubierta'] = col\n    elif 'propiedad' in col_norm and 'tipo' in col_norm:\n        features_map['propiedad'] = col\n    elif 'uso' in col_norm and 'escenario' in col_norm:\n        features_map['uso'] = col\n\nfeatures = [v for v in features_map.values() if v is not None]\n\nprint(\"\\n\" + \"=\"*70)\nprint(\"FEATURES SELECCIONADAS\")\nprint(\"=\"*70)\nfor i, feat in enumerate(features, 1):\n    n_unique = df[feat].nunique()\n    print(f\"{i}. {feat}: {n_unique} categorías\")\n\n\n\n======================================================================\nFEATURES SELECCIONADAS\n======================================================================\n1. Coordinación Zonal: 3 categorías\n2. Provincia: 7 categorías\n3. Cantón: 48 categorías\n4. Estado: 4 categorías\n5. Características de cubierta del escenario: 2 categorías\n6. Tipo de propiedad: 2 categorías\n7. Uso del escenario deportivo: 61 categorías"
+  },
+  {
+    "objectID": "clasi.html#preparar-datos",
+    "href": "clasi.html#preparar-datos",
+    "title": "Midterm 2",
+    "section": "Preparar datos",
+    "text": "Preparar datos\n\n\nCode\n# 4. PREPARAR DATOS\ndatos_validos = df[df['tiene_costo'].notna()]\ndf_model = datos_validos[features + ['tiene_costo']].copy()\n\nfor col in features:\n    df_model[col] = df_model[col].fillna('Desconocido')\n\ndf_model = df_model.drop_duplicates()\nprint(f\"\\nDatos finales: {len(df_model)} registros ({len(df_model)/len(df)*100:.1f}% del total)\")\n\n\n\n# 5. CODIFICAR\nencoders = {}\nfor col in features:\n    le = LabelEncoder()\n    df_model[col] = le.fit_transform(df_model[col].astype(str))\n    encoders[col] = le\n\nX = df_model[features].values\ny = df_model['tiene_costo'].values\n\n# 6. SPLIT\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42, stratify=y\n)\n\nprint(\"\\n\" + \"=\"*70)\nprint(\"DIVISIÓN DE DATOS\")\nprint(\"=\"*70)\nprint(f\"Train: {len(X_train)} muestras (Gratis: {(y_train==0).sum()}, Con costo: {(y_train==1).sum()})\")\nprint(f\"Test:  {len(X_test)} muestras (Gratis: {(y_test==0).sum()}, Con costo: {(y_test==1).sum()})\")\n\n\n\nDatos finales: 122 registros (83.0% del total)\n\n======================================================================\nDIVISIÓN DE DATOS\n======================================================================\nTrain: 97 muestras (Gratis: 86, Con costo: 11)\nTest:  25 muestras (Gratis: 22, Con costo: 3)"
+  },
+  {
+    "objectID": "clasi.html#pipeline",
+    "href": "clasi.html#pipeline",
+    "title": "Midterm 2",
+    "section": "Pipeline",
+    "text": "Pipeline\n\n\nCode\n# 7. PIPELINE CON REGRESIÓN LOGÍSTICA\nprint(\"\\n\" + \"=\"*70)\nprint(\"ENTRENANDO MODELO\")\nprint(\"=\"*70)\n\npipe = Pipeline([\n    ('escalado', StandardScaler()),\n    ('logreg', LogisticRegression(\n        max_iter=100000,\n        random_state=42,\n        class_weight='balanced'  # Maneja el desbalanceo de clases\n    ))\n])\n\nprint(\"Entrenando Regresión Logística con class_weight='balanced'...\")\npipe.fit(X_train, y_train)\nprint(\"✓ Modelo entrenado exitosamente\\n\")\n\n\n\n======================================================================\nENTRENANDO MODELO\n======================================================================\nEntrenando Regresión Logística con class_weight='balanced'...\n✓ Modelo entrenado exitosamente"
+  },
+  {
+    "objectID": "clasi.html#predicciones",
+    "href": "clasi.html#predicciones",
+    "title": "Midterm 2",
+    "section": "Predicciones",
+    "text": "Predicciones\n\n\nCode\n# 8. PREDICCIONES\ny_pred_train = pipe.predict(X_train)\ny_pred_test = pipe.predict(X_test)"
+  },
+  {
+    "objectID": "clasi.html#evaluacion",
+    "href": "clasi.html#evaluacion",
+    "title": "Midterm 2",
+    "section": "Evaluacion",
+    "text": "Evaluacion\n\n\nCode\n# 9. EVALUACIÓN - TRAIN\nprint(\"=\"*70)\nprint(\"RESULTADOS - CONJUNTO DE ENTRENAMIENTO\")\nprint(\"=\"*70)\nacc_train = accuracy_score(y_train, y_pred_train)\nprec_train = precision_score(y_train, y_pred_train, zero_division=0)\nrec_train = recall_score(y_train, y_pred_train, zero_division=0)\nf1_train = f1_score(y_train, y_pred_train, zero_division=0)\n\nprint(f\"Accuracy:  {acc_train:.4f} ({acc_train*100:.2f}%)\")\nprint(f\"Precision: {prec_train:.4f} ({prec_train*100:.2f}%)\")\nprint(f\"Recall:    {rec_train:.4f} ({rec_train*100:.2f}%)\")\nprint(f\"F1-Score:  {f1_train:.4f} ({f1_train*100:.2f}%)\")\n\n\n======================================================================\nRESULTADOS - CONJUNTO DE ENTRENAMIENTO\n======================================================================\nAccuracy:  0.6392 (63.92%)\nPrecision: 0.2000 (20.00%)\nRecall:    0.7273 (72.73%)\nF1-Score:  0.3137 (31.37%)"
+  },
+  {
+    "objectID": "clasi.html#evaluacion-1",
+    "href": "clasi.html#evaluacion-1",
+    "title": "Midterm 2",
+    "section": "Evaluacion",
+    "text": "Evaluacion\n\n\nCode\n# 10. EVALUACIÓN - TEST\nprint(\"\\n\" + \"=\"*70)\nprint(\"RESULTADOS - CONJUNTO DE PRUEBA\")\nprint(\"=\"*70)\nacc_test = accuracy_score(y_test, y_pred_test)\nprec_test = precision_score(y_test, y_pred_test, zero_division=0)\nrec_test = recall_score(y_test, y_pred_test, zero_division=0)\nf1_test = f1_score(y_test, y_pred_test, zero_division=0)\n\n\n\n======================================================================\nRESULTADOS - CONJUNTO DE PRUEBA\n======================================================================"
+  },
+  {
+    "objectID": "clasi.html#evaluacion-del-modelo",
+    "href": "clasi.html#evaluacion-del-modelo",
+    "title": "Midterm 2",
+    "section": "Evaluacion del modelo",
+    "text": "Evaluacion del modelo\n\n\nCode\ndiferencia = abs(acc_train - acc_test)"
+  },
+  {
+    "objectID": "clasi.html#visualizaciones",
+    "href": "clasi.html#visualizaciones",
+    "title": "Midterm 2",
+    "section": "Visualizaciones",
+    "text": "Visualizaciones\n\n\nCode\n# 12. VISUALIZACIONES\nfig, axes = plt.subplots(1, 2, figsize=(14, 5))\n\n# Matriz de confusión\nConfusionMatrixDisplay.from_predictions(\n    y_test, y_pred_test,\n    display_labels=['Gratis', 'Con Costo'],\n    cmap='Blues',\n    ax=axes[0]\n)\naxes[0].set_title(f'Matriz de Confusión\\nAccuracy: {acc_test*100:.1f}%', \n                 fontsize=12, fontweight='bold')\n\n# Comparación de métricas Train vs Test\nmetricas = ['Accuracy', 'Precision', 'Recall', 'F1-Score']\nvalores_train = [acc_train, prec_train, rec_train, f1_train]\nvalores_test = [acc_test, prec_test, rec_test, f1_test]\n\nx = np.arange(len(metricas))\nwidth = 0.35\n\naxes[1].bar(x - width/2, valores_train, width, label='Train', color='lightcoral', alpha=0.7)\naxes[1].bar(x + width/2, valores_test, width, label='Test', color='steelblue', alpha=0.7)\naxes[1].set_xlabel('Métricas', fontsize=11)\naxes[1].set_ylabel('Score', fontsize=11)\naxes[1].set_title('Comparación Train vs Test', fontweight='bold', fontsize=12)\naxes[1].set_xticks(x)\naxes[1].set_xticklabels(metricas, rotation=45, ha='right')\naxes[1].legend()\naxes[1].grid(axis='y', alpha=0.3)\naxes[1].set_ylim([0, 1.1])\n\n# Agregar valores en las barras\nfor i, v in enumerate(valores_train):\n    axes[1].text(i - width/2, v + 0.02, f'{v:.2f}', ha='center', va='bottom', fontsize=9)\nfor i, v in enumerate(valores_test):\n    axes[1].text(i + width/2, v + 0.02, f'{v:.2f}', ha='center', va='bottom', fontsize=9)\n\nplt.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "midt.html",
+    "href": "midt.html",
+    "title": "Midterm 1",
+    "section": "",
+    "text": "# Problema de Regresión\nCaso de estudio, instituciones educativas y numero de estudiantes\nImportamos CSV\nCode\nimport pandas as pd\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.model_selection import train_test_split\n\n# Cargar datos\ndf = pd.read_csv('estudios.csv', sep=';', quotechar='\"', encoding='utf-8', engine='python')\n\n# Preprocesamiento\ndf['Anio'] = df['Anio_lectivo'].str.extract(r'(\\d{4})').astype(int)\ndf = pd.get_dummies(df, columns=['Sostenimiento', 'Area', 'Regimen_Escolar'])\nCode\ndf.head()\nlist(df.columns)\ndf.drop(columns=['Anio_lectivo', 'Zona','Nombre_Institucion'], inplace=True)\n#list(df.columns)\nCode\ndf.head()\nlist(df.columns)\n\n\n['Provincia',\n 'Cod_Provincia',\n 'Canton',\n 'Cod_Canton',\n 'Parroquia',\n 'Cod_Parroquia',\n 'AMIE',\n 'Tipo_Educacion',\n 'Jurisdiccion',\n 'Docentes_Femenino',\n 'Docentes_Masculino',\n 'Total_Docentes',\n 'Estudiantes_Femenino',\n 'Estudiantes_Masculino',\n 'Total_Estudiantes',\n 'Ecuatoriana',\n 'Colombiana',\n 'Venezolana',\n 'Peruana',\n 'Otros_Paises_de_America',\n 'Otros_Continentes',\n 'Anio',\n 'Sostenimiento_Fiscal',\n 'Sostenimiento_Fiscomisional',\n 'Sostenimiento_Municipal',\n 'Sostenimiento_Particular',\n 'Area_Rural',\n 'Area_Urbana',\n 'Regimen_Escolar_Costa',\n 'Regimen_Escolar_Sierra']"
+  },
+  {
+    "objectID": "midt.html#eda",
+    "href": "midt.html#eda",
+    "title": "Midterm 1",
+    "section": "EDA",
+    "text": "EDA\n\n\nCode\n# Variables\nX = df[['Anio', 'Total_Docentes', 'Sostenimiento_Fiscal', 'Area_Rural']]  # por ejemplo\ny = df['Total_Estudiantes']\n\n# Modelo\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\nmodelo = LinearRegression()\nmodelo.fit(X_train, y_train)\n\n# Predicción\npreds = modelo.predict(X_test)"
+  },
+  {
+    "objectID": "midt.html#split-pipeline-y-fit",
+    "href": "midt.html#split-pipeline-y-fit",
+    "title": "Midterm 1",
+    "section": "Split, Pipeline y fit",
+    "text": "Split, Pipeline y fit\n\n\nCode\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.metrics import mean_absolute_error\nimport altair as alt\nfrom sklearn.metrics import mean_squared_error, r2_score\n\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n\n\npipe = Pipeline([\n    (\"escalado\", StandardScaler()),\n    (\"lineal\", LinearRegression())\n])\n\n\n# 7. Entrenar\npipe.fit(X_train, y_train)\n\n# 8. Predecir\ny_pred_pipe = pipe.predict(X_test)\n\n\n### Evaluacion\n\n\nCode\nrmse = mean_squared_error(y_test, y_pred_pipe)**0.5\nr2 = r2_score(y_test, y_pred_pipe)\n\nprint(\"RMSE:\", rmse)\nmae = mean_absolute_error(y_test, y_pred_pipe)\nprint(\"Mae:\", mae)\nprint(\"R²:\", r2)\n\n\nRMSE: 169.49257558489097\nMae: 73.31884183792116\nR²: 0.8184550851844328\n\n\nGraficos\n\n\nCode\nalt.data_transformers.disable_max_rows()\n\ndf_vp = pd.DataFrame({\n    'Valores_Reales': y_test,\n    'Predicciones': y_pred_pipe\n})\n\n# Gráfico scatter plot: Valores reales vs predicciones\nscatter = alt.Chart(df_vp).mark_circle(size=60, opacity=0.6).encode(\n    x='Valores_Reales',\n    y='Predicciones',\n    tooltip=['Valores_Reales', 'Predicciones']\n)\n\nalt.Chart(df_vp).mark_circle(size=60, opacity=0.6).encode(\n    x='Valores_Reales',\n    y='Predicciones',\n    tooltip=['Valores_Reales', 'Predicciones']\n)\n\nline = alt.Chart(pd.DataFrame({\n    'x': [df_vp['Valores_Reales'].min(), df_vp['Valores_Reales'].max()]\n})).mark_line(color='red').encode(\n    x='x',\n    y='x'\n)\n\nalt.Chart(pd.DataFrame({\n    'x': [df_vp['Valores_Reales'].min(), df_vp['Valores_Reales'].max()]\n})).mark_line(color='red').encode(\n    x='x',\n    y='x'\n)\n\n\nscatter_plot = (scatter + line).properties(\n    width=600,\n    height=400,\n    title='Predicciones vs Valores Reales'\n)\nscatter | line | scatter_plot\n# Gráfico histograma de errores\ndf_errores = pd.DataFrame({'Error': df_vp['Valores_Reales'] - df_vp['Predicciones']})\n\nhistograma = alt.Chart(df_errores).mark_bar().encode(\n    alt.X('Error', bin=alt.Bin(maxbins=30)),\n    y='count()'\n).properties(\n    width=600,\n    height=300,\n    title='Distribución de Errores'\n)\n\n\n\n\nCode\nhistograma\n\n\n\n\n\n\n\n\n\n\nCode\nscatter_plot\n\n\n\n\n\n\n\n\n\nYachay Tech"
+  }
+]

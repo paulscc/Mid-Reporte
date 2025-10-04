@@ -1,0 +1,270 @@
+{
+  "cells": [
+    {
+      "cell_type": "raw",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: Midterm 1\n",
+        "author: 'Paul C '\n",
+        "date: 10-04-2025\n",
+        "format:\n",
+        "  html:\n",
+        "    embed-resources: true\n",
+        "---"
+      ],
+      "id": "c79e91ba"
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        " # Problema de Regresión\n",
+        "\n",
+        "Caso de estudio, instituciones educativas y numero de estudiantes\n",
+        "\n",
+        "Importamos CSV"
+      ],
+      "id": "281546a3"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import pandas as pd\n",
+        "from sklearn.linear_model import LinearRegression\n",
+        "from sklearn.model_selection import train_test_split\n",
+        "\n",
+        "# Cargar datos\n",
+        "df = pd.read_csv('estudios.csv', sep=';', quotechar='\"', encoding='utf-8', engine='python')\n",
+        "\n",
+        "# Preprocesamiento\n",
+        "df['Anio'] = df['Anio_lectivo'].str.extract(r'(\\d{4})').astype(int)\n",
+        "df = pd.get_dummies(df, columns=['Sostenimiento', 'Area', 'Regimen_Escolar'])\n"
+      ],
+      "id": "95fdcc00",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "df.head()\n",
+        "list(df.columns)\n",
+        "df.drop(columns=['Anio_lectivo', 'Zona','Nombre_Institucion'], inplace=True)\n",
+        "#list(df.columns)"
+      ],
+      "id": "01c5f9f7",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "df.head()\n",
+        "list(df.columns)"
+      ],
+      "id": "b519104c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## EDA"
+      ],
+      "id": "a620eef4"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Variables\n",
+        "X = df[['Anio', 'Total_Docentes', 'Sostenimiento_Fiscal', 'Area_Rural']]  # por ejemplo\n",
+        "y = df['Total_Estudiantes']\n",
+        "\n",
+        "# Modelo\n",
+        "X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n",
+        "modelo = LinearRegression()\n",
+        "modelo.fit(X_train, y_train)\n",
+        "\n",
+        "# Predicción\n",
+        "preds = modelo.predict(X_test)"
+      ],
+      "id": "84f156d9",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Split, Pipeline y fit"
+      ],
+      "id": "c8625a43"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "from sklearn.pipeline import Pipeline\n",
+        "from sklearn.preprocessing import StandardScaler\n",
+        "from sklearn.metrics import mean_absolute_error\n",
+        "import altair as alt\n",
+        "from sklearn.metrics import mean_squared_error, r2_score\n",
+        "\n",
+        "X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n",
+        "\n",
+        "\n",
+        "pipe = Pipeline([\n",
+        "    (\"escalado\", StandardScaler()),\n",
+        "    (\"lineal\", LinearRegression())\n",
+        "])\n",
+        "\n",
+        "\n",
+        "# 7. Entrenar\n",
+        "pipe.fit(X_train, y_train)\n",
+        "\n",
+        "# 8. Predecir\n",
+        "y_pred_pipe = pipe.predict(X_test)"
+      ],
+      "id": "fad0b938",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        " ### Evaluacion"
+      ],
+      "id": "fd676c26"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "rmse = mean_squared_error(y_test, y_pred_pipe)**0.5\n",
+        "r2 = r2_score(y_test, y_pred_pipe)\n",
+        "\n",
+        "print(\"RMSE:\", rmse)\n",
+        "mae = mean_absolute_error(y_test, y_pred_pipe)\n",
+        "print(\"Mae:\", mae)\n",
+        "print(\"R²:\", r2)"
+      ],
+      "id": "47f71027",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Graficos"
+      ],
+      "id": "fa7748fd"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "alt.data_transformers.disable_max_rows()\n",
+        "\n",
+        "df_vp = pd.DataFrame({\n",
+        "    'Valores_Reales': y_test,\n",
+        "    'Predicciones': y_pred_pipe\n",
+        "})\n",
+        "\n",
+        "# Gráfico scatter plot: Valores reales vs predicciones\n",
+        "scatter = alt.Chart(df_vp).mark_circle(size=60, opacity=0.6).encode(\n",
+        "    x='Valores_Reales',\n",
+        "    y='Predicciones',\n",
+        "    tooltip=['Valores_Reales', 'Predicciones']\n",
+        ")\n",
+        "\n",
+        "alt.Chart(df_vp).mark_circle(size=60, opacity=0.6).encode(\n",
+        "    x='Valores_Reales',\n",
+        "    y='Predicciones',\n",
+        "    tooltip=['Valores_Reales', 'Predicciones']\n",
+        ")\n",
+        "\n",
+        "line = alt.Chart(pd.DataFrame({\n",
+        "    'x': [df_vp['Valores_Reales'].min(), df_vp['Valores_Reales'].max()]\n",
+        "})).mark_line(color='red').encode(\n",
+        "    x='x',\n",
+        "    y='x'\n",
+        ")\n",
+        "\n",
+        "alt.Chart(pd.DataFrame({\n",
+        "    'x': [df_vp['Valores_Reales'].min(), df_vp['Valores_Reales'].max()]\n",
+        "})).mark_line(color='red').encode(\n",
+        "    x='x',\n",
+        "    y='x'\n",
+        ")\n",
+        "\n",
+        "\n",
+        "scatter_plot = (scatter + line).properties(\n",
+        "    width=600,\n",
+        "    height=400,\n",
+        "    title='Predicciones vs Valores Reales'\n",
+        ")\n",
+        "scatter | line | scatter_plot\n",
+        "# Gráfico histograma de errores\n",
+        "df_errores = pd.DataFrame({'Error': df_vp['Valores_Reales'] - df_vp['Predicciones']})\n",
+        "\n",
+        "histograma = alt.Chart(df_errores).mark_bar().encode(\n",
+        "    alt.X('Error', bin=alt.Bin(maxbins=30)),\n",
+        "    y='count()'\n",
+        ").properties(\n",
+        "    width=600,\n",
+        "    height=300,\n",
+        "    title='Distribución de Errores'\n",
+        ")\n"
+      ],
+      "id": "c18de824",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "histograma"
+      ],
+      "id": "c42d1e11",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "scatter_plot"
+      ],
+      "id": "f8086157",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Yachay Tech"
+      ],
+      "id": "075e90c6"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "c:\\Users\\pcstu\\OneDrive\\Documentos\\MIA\\ML\\Semana 1\\ml1\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
