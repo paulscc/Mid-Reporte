@@ -3961,7 +3961,7 @@ vertical-align: -.125em;
 </header>
 
 
-<div id="10531688" class="cell" data-execution_count="1">
+<div id="5c42f4fa" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -3979,7 +3979,7 @@ vertical-align: -.125em;
 </div>
 <section id="carga-de-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="carga-de-dataset">Carga de dataset</h2>
-<div id="68844c9e" class="cell" data-execution_count="2">
+<div id="d7c99caf" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. CARGAR DATASET</span></span>
@@ -4008,7 +4008,7 @@ Total de registros: 147</code></pre>
 </section>
 <section id="variable-objetivo" class="level2">
 <h2 class="anchored" data-anchor-id="variable-objetivo">Variable objetivo</h2>
-<div id="5857d712" class="cell" data-execution_count="3">
+<div id="8ab64ea4" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. VARIABLE OBJETIVO</span></span>
@@ -4039,7 +4039,7 @@ Desbalanceo de clases: 9.50:1</code></pre>
 </section>
 <section id="seleccion-de-features" class="level2">
 <h2 class="anchored" data-anchor-id="seleccion-de-features">Seleccion de features</h2>
-<div id="2412b123" class="cell" data-execution_count="4">
+<div id="43b9e374" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. SELECCIONAR FEATURES</span></span>
@@ -4091,7 +4091,7 @@ FEATURES SELECCIONADAS
 </section>
 <section id="preparar-datos" class="level2">
 <h2 class="anchored" data-anchor-id="preparar-datos">Preparar datos</h2>
-<div id="80fbb638" class="cell" data-execution_count="5">
+<div id="49bb4b04" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>datos_validos <span class="op">=</span> df[df[<span class="st">&#39;tiene_costo&#39;</span>].notna()]</span>
@@ -4140,7 +4140,7 @@ Test:  25 muestras (Gratis: 22, Con costo: 3)</code></pre>
 </section>
 <section id="pipeline" class="level2">
 <h2 class="anchored" data-anchor-id="pipeline">Pipeline</h2>
-<div id="8d7bc2bd" class="cell" data-execution_count="6">
+<div id="77901a69" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 7. PIPELINE CON REGRESIÓN LOGÍSTICA</span></span>
@@ -4174,7 +4174,7 @@ Entrenando Regresión Logística con class_weight=&#39;balanced&#39;...
 </section>
 <section id="predicciones" class="level2">
 <h2 class="anchored" data-anchor-id="predicciones">Predicciones</h2>
-<div id="5a5dc154" class="cell" data-execution_count="7">
+<div id="54aba1d5" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 8. PREDICCIONES</span></span>
@@ -4185,7 +4185,7 @@ Entrenando Regresión Logística con class_weight=&#39;balanced&#39;...
 </section>
 <section id="evaluacion" class="level2">
 <h2 class="anchored" data-anchor-id="evaluacion">Evaluacion</h2>
-<div id="960581ae" class="cell" data-execution_count="8">
+<div id="8cb9e9ea" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;=&quot;</span><span class="op">*</span><span class="dv">70</span>)</span>
@@ -4214,7 +4214,7 @@ F1-Score:  0.3137 (31.37%)</code></pre>
 </section>
 <section id="evaluacion-1" class="level2">
 <h2 class="anchored" data-anchor-id="evaluacion-1">Evaluacion</h2>
-<div id="755cc069" class="cell" data-execution_count="9">
+<div id="6ab38062" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 10. EVALUACIÓN - </span><span class="al">TEST</span></span>
@@ -4236,7 +4236,7 @@ RESULTADOS - CONJUNTO DE PRUEBA
 </section>
 <section id="evaluacion-del-modelo" class="level2">
 <h2 class="anchored" data-anchor-id="evaluacion-del-modelo">Evaluacion del modelo</h2>
-<div id="5ee4e171" class="cell" data-execution_count="10">
+<div id="6bc9906e" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>diferencia <span class="op">=</span> <span class="bu">abs</span>(acc_train <span class="op">-</span> acc_test)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -4246,7 +4246,7 @@ RESULTADOS - CONJUNTO DE PRUEBA
 <section id="visualizaciones" class="level2">
 <h2 class="anchored" data-anchor-id="visualizaciones">Visualizaciones</h2>
 <p>Visualizaremos la matriz de confucion</p>
-<div id="a84e9af7" class="cell" data-execution_count="11">
+<div id="2d8f2818" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">5</span>))</span>
@@ -4300,7 +4300,7 @@ RESULTADOS - CONJUNTO DE PRUEBA
 <section id="roc-distribucion-de-clases-y-curva-graficas" class="level3">
 <h3 class="anchored" data-anchor-id="roc-distribucion-de-clases-y-curva-graficas">ROC, DISTRIBUCION DE CLASES Y CURVA (GRAFICAS)</h3>
 <pre><code>Se usara altair para es despliegue de estas graficas</code></pre>
-<div id="c79fd22f" class="cell" data-execution_count="12">
+<div id="db108e34" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_curve, auc</span>

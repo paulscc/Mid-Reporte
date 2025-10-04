@@ -192,7 +192,43 @@ scatter_plot
 ```
 
 ```{python}
+from sklearn.model_selection import learning_curve
+import matplotlib.pyplot as plt
+import numpy as np
 
+train_sizes, train_scores, val_scores = learning_curve(
+    estimator=pipe,
+    X=X_train,
+    y=y_train,
+    cv=2,  # Solo 2 folds
+    train_sizes=[0.5, 0.75, 1.0],  # Solo 3 puntos
+    scoring='neg_mean_squared_error',
+    n_jobs=1
+)
+
+train_scores_mean = np.sqrt(-train_scores.mean(axis=1))
+val_scores_mean = np.sqrt(-val_scores.mean(axis=1))
+
+df_learning = pd.DataFrame({
+    'train_size': np.tile(train_sizes, 2),
+    'score': np.concatenate([train_scores_mean, val_scores_mean]),
+    'tipo': ['Entrenamiento']*len(train_sizes) + ['Validación']*len(train_sizes)
+})
+
+zoom = alt.selection_interval(bind='scales')
+
+curva_aprendizaje = alt.Chart(df_learning).mark_line(point=True).encode(
+    x='train_size:Q',
+    y='score:Q',
+    color='tipo:N',
+    tooltip=['train_size', 'score', 'tipo']
+).properties(
+    width=600,
+    height=400,
+    title='Curva de Aprendizaje'
+).add_selection(zoom)
+
+curva_aprendizaje
 ```
 
 ### Resultados
