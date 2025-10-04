@@ -3921,7 +3921,8 @@ vertical-align: -.125em;
   <li><a href="#evaluacion-del-modelo" id="toc-evaluacion-del-modelo" class="nav-link" data-scroll-target="#evaluacion-del-modelo">Evaluacion del modelo</a></li>
   <li><a href="#visualizaciones" id="toc-visualizaciones" class="nav-link" data-scroll-target="#visualizaciones">Visualizaciones</a>
   <ul class="collapse">
-  <li><a href="#se-puede-observar-como-la-canchas-publicas-tienen-al-mayor-cantidad-a-diferencia-de-canchas-con-costo-los-resultados-reflejan-la-realidad." id="toc-se-puede-observar-como-la-canchas-publicas-tienen-al-mayor-cantidad-a-diferencia-de-canchas-con-costo-los-resultados-reflejan-la-realidad." class="nav-link" data-scroll-target="#se-puede-observar-como-la-canchas-publicas-tienen-al-mayor-cantidad-a-diferencia-de-canchas-con-costo-los-resultados-reflejan-la-realidad.">Se puede observar como la canchas publicas tienen al mayor cantidad a diferencia de canchas con costo; los resultados reflejan la realidad.</a></li>
+  <li><a href="#roc-distribucion-de-clases-y-curva-graficas" id="toc-roc-distribucion-de-clases-y-curva-graficas" class="nav-link" data-scroll-target="#roc-distribucion-de-clases-y-curva-graficas">ROC, DISTRIBUCION DE CLASES Y CURVA (GRAFICAS)</a></li>
+  <li><a href="#se-puede-observar-como-la-canchas-publicas-tienen-al-mayor-cantidad-a-diferencia-de-canchas-con-costo-los-resultados-reflejan-la-realidad-una-mejor-cantidad-de-datos-nos-podrian-ser-util-para-mejorar-el-modelo." id="toc-se-puede-observar-como-la-canchas-publicas-tienen-al-mayor-cantidad-a-diferencia-de-canchas-con-costo-los-resultados-reflejan-la-realidad-una-mejor-cantidad-de-datos-nos-podrian-ser-util-para-mejorar-el-modelo." class="nav-link" data-scroll-target="#se-puede-observar-como-la-canchas-publicas-tienen-al-mayor-cantidad-a-diferencia-de-canchas-con-costo-los-resultados-reflejan-la-realidad-una-mejor-cantidad-de-datos-nos-podrian-ser-util-para-mejorar-el-modelo.">Se puede observar como la canchas publicas tienen al mayor cantidad a diferencia de canchas con costo; los resultados reflejan la realidad, una mejor cantidad de datos nos podrian ser util para mejorar el modelo.</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -3960,7 +3961,7 @@ vertical-align: -.125em;
 </header>
 
 
-<div id="a8a43e9a" class="cell" data-execution_count="1">
+<div id="10531688" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -3978,7 +3979,7 @@ vertical-align: -.125em;
 </div>
 <section id="carga-de-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="carga-de-dataset">Carga de dataset</h2>
-<div id="7828d289" class="cell" data-execution_count="2">
+<div id="68844c9e" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. CARGAR DATASET</span></span>
@@ -4007,7 +4008,7 @@ Total de registros: 147</code></pre>
 </section>
 <section id="variable-objetivo" class="level2">
 <h2 class="anchored" data-anchor-id="variable-objetivo">Variable objetivo</h2>
-<div id="388040f4" class="cell" data-execution_count="3">
+<div id="5857d712" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. VARIABLE OBJETIVO</span></span>
@@ -4038,7 +4039,7 @@ Desbalanceo de clases: 9.50:1</code></pre>
 </section>
 <section id="seleccion-de-features" class="level2">
 <h2 class="anchored" data-anchor-id="seleccion-de-features">Seleccion de features</h2>
-<div id="9a935071" class="cell" data-execution_count="4">
+<div id="2412b123" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. SELECCIONAR FEATURES</span></span>
@@ -4090,7 +4091,7 @@ FEATURES SELECCIONADAS
 </section>
 <section id="preparar-datos" class="level2">
 <h2 class="anchored" data-anchor-id="preparar-datos">Preparar datos</h2>
-<div id="473ce6bd" class="cell" data-execution_count="5">
+<div id="80fbb638" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>datos_validos <span class="op">=</span> df[df[<span class="st">&#39;tiene_costo&#39;</span>].notna()]</span>
@@ -4139,7 +4140,7 @@ Test:  25 muestras (Gratis: 22, Con costo: 3)</code></pre>
 </section>
 <section id="pipeline" class="level2">
 <h2 class="anchored" data-anchor-id="pipeline">Pipeline</h2>
-<div id="f1eea895" class="cell" data-execution_count="6">
+<div id="8d7bc2bd" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 7. PIPELINE CON REGRESIÓN LOGÍSTICA</span></span>
@@ -4173,7 +4174,7 @@ Entrenando Regresión Logística con class_weight=&#39;balanced&#39;...
 </section>
 <section id="predicciones" class="level2">
 <h2 class="anchored" data-anchor-id="predicciones">Predicciones</h2>
-<div id="ccb39230" class="cell" data-execution_count="7">
+<div id="5a5dc154" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 8. PREDICCIONES</span></span>
@@ -4184,7 +4185,7 @@ Entrenando Regresión Logística con class_weight=&#39;balanced&#39;...
 </section>
 <section id="evaluacion" class="level2">
 <h2 class="anchored" data-anchor-id="evaluacion">Evaluacion</h2>
-<div id="ad8c9c66" class="cell" data-execution_count="8">
+<div id="960581ae" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;=&quot;</span><span class="op">*</span><span class="dv">70</span>)</span>
@@ -4213,7 +4214,7 @@ F1-Score:  0.3137 (31.37%)</code></pre>
 </section>
 <section id="evaluacion-1" class="level2">
 <h2 class="anchored" data-anchor-id="evaluacion-1">Evaluacion</h2>
-<div id="7efd2ee6" class="cell" data-execution_count="9">
+<div id="755cc069" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 10. EVALUACIÓN - </span><span class="al">TEST</span></span>
@@ -4235,7 +4236,7 @@ RESULTADOS - CONJUNTO DE PRUEBA
 </section>
 <section id="evaluacion-del-modelo" class="level2">
 <h2 class="anchored" data-anchor-id="evaluacion-del-modelo">Evaluacion del modelo</h2>
-<div id="74479036" class="cell" data-execution_count="10">
+<div id="5ee4e171" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>diferencia <span class="op">=</span> <span class="bu">abs</span>(acc_train <span class="op">-</span> acc_test)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -4244,49 +4245,49 @@ RESULTADOS - CONJUNTO DE PRUEBA
 </section>
 <section id="visualizaciones" class="level2">
 <h2 class="anchored" data-anchor-id="visualizaciones">Visualizaciones</h2>
-<div id="7de3cc9c" class="cell" data-execution_count="11">
+<p>Visualizaremos la matriz de confucion</p>
+<div id="a84e9af7" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 12. VISUALIZACIONES</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">5</span>))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">5</span>))</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz de confusión</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>ConfusionMatrixDisplay.from_predictions(</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    y_test, y_pred_test,</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    display_labels<span class="op">=</span>[<span class="st">&#39;Gratis&#39;</span>, <span class="st">&#39;Con Costo&#39;</span>],</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">&#39;Blues&#39;</span>,</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>axes[<span class="dv">0</span>]</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="ss">f&#39;Matriz de Confusión</span><span class="ch">\n</span><span class="ss">Accuracy: </span><span class="sc">{</span>acc_test<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%&#39;</span>, </span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>                 fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparación de métricas Train vs Test</span></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>metricas <span class="op">=</span> [<span class="st">&#39;Accuracy&#39;</span>, <span class="st">&#39;Precision&#39;</span>, <span class="st">&#39;Recall&#39;</span>, <span class="st">&#39;F1-Score&#39;</span>]</span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>valores_train <span class="op">=</span> [acc_train, prec_train, rec_train, f1_train]</span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>valores_test <span class="op">=</span> [acc_test, prec_test, rec_test, f1_test]</span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="bu">len</span>(metricas))</span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>width <span class="op">=</span> <span class="fl">0.35</span></span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].bar(x <span class="op">-</span> width<span class="op">/</span><span class="dv">2</span>, valores_train, width, label<span class="op">=</span><span class="st">&#39;Train&#39;</span>, color<span class="op">=</span><span class="st">&#39;lightcoral&#39;</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].bar(x <span class="op">+</span> width<span class="op">/</span><span class="dv">2</span>, valores_test, width, label<span class="op">=</span><span class="st">&#39;Test&#39;</span>, color<span class="op">=</span><span class="st">&#39;steelblue&#39;</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xlabel(<span class="st">&#39;Métricas&#39;</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_ylabel(<span class="st">&#39;Score&#39;</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">&#39;Comparación Train vs Test&#39;</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xticks(x)</span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xticklabels(metricas, rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">&#39;right&#39;</span>)</span>
-<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].legend()</span>
-<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].grid(axis<span class="op">=</span><span class="st">&#39;y&#39;</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_ylim([<span class="dv">0</span>, <span class="fl">1.1</span>])</span>
-<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Agregar valores en las barras</span></span>
-<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, v <span class="kw">in</span> <span class="bu">enumerate</span>(valores_train):</span>
-<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">1</span>].text(i <span class="op">-</span> width<span class="op">/</span><span class="dv">2</span>, v <span class="op">+</span> <span class="fl">0.02</span>, <span class="ss">f&#39;</span><span class="sc">{</span>v<span class="sc">:.2f}</span><span class="ss">&#39;</span>, ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, va<span class="op">=</span><span class="st">&#39;bottom&#39;</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
-<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, v <span class="kw">in</span> <span class="bu">enumerate</span>(valores_test):</span>
-<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">1</span>].text(i <span class="op">+</span> width<span class="op">/</span><span class="dv">2</span>, v <span class="op">+</span> <span class="fl">0.02</span>, <span class="ss">f&#39;</span><span class="sc">{</span>v<span class="sc">:.2f}</span><span class="ss">&#39;</span>, ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, va<span class="op">=</span><span class="st">&#39;bottom&#39;</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
-<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>ConfusionMatrixDisplay.from_predictions(</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    y_test, y_pred_test,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    display_labels<span class="op">=</span>[<span class="st">&#39;Gratis&#39;</span>, <span class="st">&#39;Con Costo&#39;</span>],</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">&#39;Blues&#39;</span>,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>axes[<span class="dv">0</span>]</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="ss">f&#39;Matriz de Confusión</span><span class="ch">\n</span><span class="ss">Accuracy: </span><span class="sc">{</span>acc_test<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%&#39;</span>, </span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>                 fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparación de métricas Train vs Test</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>metricas <span class="op">=</span> [<span class="st">&#39;Accuracy&#39;</span>, <span class="st">&#39;Precision&#39;</span>, <span class="st">&#39;Recall&#39;</span>, <span class="st">&#39;F1-Score&#39;</span>]</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>valores_train <span class="op">=</span> [acc_train, prec_train, rec_train, f1_train]</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>valores_test <span class="op">=</span> [acc_test, prec_test, rec_test, f1_test]</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="bu">len</span>(metricas))</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>width <span class="op">=</span> <span class="fl">0.35</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].bar(x <span class="op">-</span> width<span class="op">/</span><span class="dv">2</span>, valores_train, width, label<span class="op">=</span><span class="st">&#39;Train&#39;</span>, color<span class="op">=</span><span class="st">&#39;lightcoral&#39;</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].bar(x <span class="op">+</span> width<span class="op">/</span><span class="dv">2</span>, valores_test, width, label<span class="op">=</span><span class="st">&#39;Test&#39;</span>, color<span class="op">=</span><span class="st">&#39;steelblue&#39;</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xlabel(<span class="st">&#39;Métricas&#39;</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_ylabel(<span class="st">&#39;Score&#39;</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">&#39;Comparación Train vs Test&#39;</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xticks(x)</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xticklabels(metricas, rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">&#39;right&#39;</span>)</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].legend()</span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].grid(axis<span class="op">=</span><span class="st">&#39;y&#39;</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_ylim([<span class="dv">0</span>, <span class="fl">1.1</span>])</span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Agregar valores en las barras</span></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, v <span class="kw">in</span> <span class="bu">enumerate</span>(valores_train):</span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">1</span>].text(i <span class="op">-</span> width<span class="op">/</span><span class="dv">2</span>, v <span class="op">+</span> <span class="fl">0.02</span>, <span class="ss">f&#39;</span><span class="sc">{</span>v<span class="sc">:.2f}</span><span class="ss">&#39;</span>, ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, va<span class="op">=</span><span class="st">&#39;bottom&#39;</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, v <span class="kw">in</span> <span class="bu">enumerate</span>(valores_test):</span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">1</span>].text(i <span class="op">+</span> width<span class="op">/</span><span class="dv">2</span>, v <span class="op">+</span> <span class="fl">0.02</span>, <span class="ss">f&#39;</span><span class="sc">{</span>v<span class="sc">:.2f}</span><span class="ss">&#39;</span>, ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, va<span class="op">=</span><span class="st">&#39;bottom&#39;</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -4296,59 +4297,56 @@ RESULTADOS - CONJUNTO DE PRUEBA
 </div>
 </div>
 </div>
-<div id="3cc7bd51" class="cell" data-execution_count="12">
+<section id="roc-distribucion-de-clases-y-curva-graficas" class="level3">
+<h3 class="anchored" data-anchor-id="roc-distribucion-de-clases-y-curva-graficas">ROC, DISTRIBUCION DE CLASES Y CURVA (GRAFICAS)</h3>
+<pre><code>Se usara altair para es despliegue de estas graficas</code></pre>
+<div id="c79fd22f" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_curve, auc</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtener probabilidades para la curva ROC</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>y_proba_test <span class="op">=</span> pipe.predict_proba(X_test)[:, <span class="dv">1</span>]</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular curva ROC</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>fpr, tpr, thresholds <span class="op">=</span> roc_curve(y_test, y_proba_test)</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>roc_auc <span class="op">=</span> auc(fpr, tpr)</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">5</span>))</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="co"># GRÁFICA 1: Distribución de clases</span></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> axes[<span class="dv">0</span>]</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>clases <span class="op">=</span> [<span class="st">&#39;Gratis (0)&#39;</span>, <span class="st">&#39;Con Costo (1)&#39;</span>]</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>valores <span class="op">=</span> [dist.get(<span class="dv">0</span>, <span class="dv">0</span>), dist.get(<span class="dv">1</span>, <span class="dv">0</span>)]</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>colores <span class="op">=</span> [<span class="st">&#39;#3498db&#39;</span>, <span class="st">&#39;#e74c3c&#39;</span>]</span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>bars <span class="op">=</span> ax1.bar(clases, valores, color<span class="op">=</span>colores, alpha<span class="op">=</span><span class="fl">0.7</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>)</span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">&#39;Cantidad de Canchas&#39;</span>, fontsize<span class="op">=</span><span class="dv">11</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">&#39;Distribución de Clases en el Dataset&#39;</span>, fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>ax1.grid(axis<span class="op">=</span><span class="st">&#39;y&#39;</span>, alpha<span class="op">=</span><span class="fl">0.3</span>, linestyle<span class="op">=</span><span class="st">&#39;--&#39;</span>)</span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Agregar valores en las barras</span></span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> bar, val <span class="kw">in</span> <span class="bu">zip</span>(bars, valores):</span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>    height <span class="op">=</span> bar.get_height()</span>
-<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>    ax1.text(bar.get_x() <span class="op">+</span> bar.get_width()<span class="op">/</span><span class="fl">2.</span>, height,</span>
-<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f&#39;</span><span class="sc">{</span>val<span class="sc">}</span><span class="ch">\n</span><span class="ss">(</span><span class="sc">{</span>val<span class="op">/</span>total<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%)&#39;</span>,</span>
-<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>            ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, va<span class="op">=</span><span class="st">&#39;bottom&#39;</span>, fontsize<span class="op">=</span><span class="dv">10</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
-<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Agregar línea de desbalanceo</span></span>
-<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>ratio <span class="op">=</span> dist.get(<span class="dv">0</span>, <span class="dv">0</span>) <span class="op">/</span> dist.get(<span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>ax1.text(<span class="fl">0.5</span>, <span class="bu">max</span>(valores)<span class="op">*</span><span class="fl">0.9</span>, <span class="ss">f&#39;Ratio de desbalanceo: </span><span class="sc">{</span>ratio<span class="sc">:.1f}</span><span class="ss">:1&#39;</span>, </span>
-<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>         ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, fontsize<span class="op">=</span><span class="dv">10</span>, style<span class="op">=</span><span class="st">&#39;italic&#39;</span>,</span>
-<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>         bbox<span class="op">=</span><span class="bu">dict</span>(boxstyle<span class="op">=</span><span class="st">&#39;round&#39;</span>, facecolor<span class="op">=</span><span class="st">&#39;wheat&#39;</span>, alpha<span class="op">=</span><span class="fl">0.5</span>))</span>
-<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a><span class="co"># GRÁFICA 2: Curva ROC</span></span>
-<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> axes[<span class="dv">1</span>]</span>
-<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>ax2.plot(fpr, tpr, color<span class="op">=</span><span class="st">&#39;#2ecc71&#39;</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="ss">f&#39;ROC (AUC = </span><span class="sc">{</span>roc_auc<span class="sc">:.3f}</span><span class="ss">)&#39;</span>)</span>
-<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>ax2.plot([<span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">0</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">&#39;gray&#39;</span>, linestyle<span class="op">=</span><span class="st">&#39;--&#39;</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">&#39;Azar (AUC = 0.500)&#39;</span>)</span>
-<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>ax2.set_xlim([<span class="fl">0.0</span>, <span class="fl">1.0</span>])</span>
-<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>ax2.set_ylim([<span class="fl">0.0</span>, <span class="fl">1.05</span>])</span>
-<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">&#39;Tasa de Falsos Positivos (FPR)&#39;</span>, fontsize<span class="op">=</span><span class="dv">11</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
-<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">&#39;Tasa de Verdaderos Positivos (TPR)&#39;</span>, fontsize<span class="op">=</span><span class="dv">11</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
-<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>ax2.set_title(<span class="st">&#39;Curva ROC - Regresión Logística&#39;</span>, fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
-<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>ax2.legend(loc<span class="op">=</span><span class="st">&#39;lower right&#39;</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>ax2.grid(alpha<span class="op">=</span><span class="fl">0.3</span>, linestyle<span class="op">=</span><span class="st">&#39;--&#39;</span>)</span>
-<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Sombrear área bajo la curva</span></span>
-<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a>ax2.fill_between(fpr, tpr, alpha<span class="op">=</span><span class="fl">0.2</span>, color<span class="op">=</span><span class="st">&#39;#2ecc71&#39;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_curve, auc</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>y_proba_test <span class="op">=</span> pipe.predict_proba(X_test)[:, <span class="dv">1</span>]</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>fpr, tpr, thresholds <span class="op">=</span> roc_curve(y_test, y_proba_test)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>roc_auc <span class="op">=</span> auc(fpr, tpr)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">5</span>))</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> axes[<span class="dv">0</span>]</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>clases <span class="op">=</span> [<span class="st">&#39;Gratis (0)&#39;</span>, <span class="st">&#39;Con Costo (1)&#39;</span>]</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>valores <span class="op">=</span> [dist.get(<span class="dv">0</span>, <span class="dv">0</span>), dist.get(<span class="dv">1</span>, <span class="dv">0</span>)]</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>colores <span class="op">=</span> [<span class="st">&#39;#3498db&#39;</span>, <span class="st">&#39;#e74c3c&#39;</span>]</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>bars <span class="op">=</span> ax1.bar(clases, valores, color<span class="op">=</span>colores, alpha<span class="op">=</span><span class="fl">0.7</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>)</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">&#39;Cantidad de Canchas&#39;</span>, fontsize<span class="op">=</span><span class="dv">11</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">&#39;Distribución de Clases en el Dataset&#39;</span>, fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>ax1.grid(axis<span class="op">=</span><span class="st">&#39;y&#39;</span>, alpha<span class="op">=</span><span class="fl">0.3</span>, linestyle<span class="op">=</span><span class="st">&#39;--&#39;</span>)</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> bar, val <span class="kw">in</span> <span class="bu">zip</span>(bars, valores):</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>    height <span class="op">=</span> bar.get_height()</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>    ax1.text(bar.get_x() <span class="op">+</span> bar.get_width()<span class="op">/</span><span class="fl">2.</span>, height,</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f&#39;</span><span class="sc">{</span>val<span class="sc">}</span><span class="ch">\n</span><span class="ss">(</span><span class="sc">{</span>val<span class="op">/</span>total<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%)&#39;</span>,</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>            ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, va<span class="op">=</span><span class="st">&#39;bottom&#39;</span>, fontsize<span class="op">=</span><span class="dv">10</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>ratio <span class="op">=</span> dist.get(<span class="dv">0</span>, <span class="dv">0</span>) <span class="op">/</span> dist.get(<span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>ax1.text(<span class="fl">0.5</span>, <span class="bu">max</span>(valores)<span class="op">*</span><span class="fl">0.9</span>, <span class="ss">f&#39;Ratio de desbalanceo: </span><span class="sc">{</span>ratio<span class="sc">:.1f}</span><span class="ss">:1&#39;</span>, </span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>         ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, fontsize<span class="op">=</span><span class="dv">10</span>, style<span class="op">=</span><span class="st">&#39;italic&#39;</span>,</span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>         bbox<span class="op">=</span><span class="bu">dict</span>(boxstyle<span class="op">=</span><span class="st">&#39;round&#39;</span>, facecolor<span class="op">=</span><span class="st">&#39;wheat&#39;</span>, alpha<span class="op">=</span><span class="fl">0.5</span>))</span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> axes[<span class="dv">1</span>]</span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>ax2.plot(fpr, tpr, color<span class="op">=</span><span class="st">&#39;#2ecc71&#39;</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="ss">f&#39;ROC (AUC = </span><span class="sc">{</span>roc_auc<span class="sc">:.3f}</span><span class="ss">)&#39;</span>)</span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>ax2.plot([<span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">0</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">&#39;gray&#39;</span>, linestyle<span class="op">=</span><span class="st">&#39;--&#39;</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">&#39;Azar (AUC = 0.500)&#39;</span>)</span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>ax2.set_xlim([<span class="fl">0.0</span>, <span class="fl">1.0</span>])</span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>ax2.set_ylim([<span class="fl">0.0</span>, <span class="fl">1.05</span>])</span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">&#39;Tasa de Falsos Positivos (FPR)&#39;</span>, fontsize<span class="op">=</span><span class="dv">11</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">&#39;Tasa de Verdaderos Positivos (TPR)&#39;</span>, fontsize<span class="op">=</span><span class="dv">11</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>ax2.set_title(<span class="st">&#39;Curva ROC - Regresión Logística&#39;</span>, fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>ax2.legend(loc<span class="op">=</span><span class="st">&#39;lower right&#39;</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>ax2.grid(alpha<span class="op">=</span><span class="fl">0.3</span>, linestyle<span class="op">=</span><span class="st">&#39;--&#39;</span>)</span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>ax2.fill_between(fpr, tpr, alpha<span class="op">=</span><span class="fl">0.2</span>, color<span class="op">=</span><span class="st">&#39;#2ecc71&#39;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -4358,8 +4356,9 @@ RESULTADOS - CONJUNTO DE PRUEBA
 </div>
 </div>
 </div>
-<section id="se-puede-observar-como-la-canchas-publicas-tienen-al-mayor-cantidad-a-diferencia-de-canchas-con-costo-los-resultados-reflejan-la-realidad." class="level3">
-<h3 class="anchored" data-anchor-id="se-puede-observar-como-la-canchas-publicas-tienen-al-mayor-cantidad-a-diferencia-de-canchas-con-costo-los-resultados-reflejan-la-realidad.">Se puede observar como la canchas publicas tienen al mayor cantidad a diferencia de canchas con costo; los resultados reflejan la realidad.</h3>
+</section>
+<section id="se-puede-observar-como-la-canchas-publicas-tienen-al-mayor-cantidad-a-diferencia-de-canchas-con-costo-los-resultados-reflejan-la-realidad-una-mejor-cantidad-de-datos-nos-podrian-ser-util-para-mejorar-el-modelo." class="level3">
+<h3 class="anchored" data-anchor-id="se-puede-observar-como-la-canchas-publicas-tienen-al-mayor-cantidad-a-diferencia-de-canchas-con-costo-los-resultados-reflejan-la-realidad-una-mejor-cantidad-de-datos-nos-podrian-ser-util-para-mejorar-el-modelo.">Se puede observar como la canchas publicas tienen al mayor cantidad a diferencia de canchas con costo; los resultados reflejan la realidad, una mejor cantidad de datos nos podrian ser util para mejorar el modelo.</h3>
 
 
 </section>

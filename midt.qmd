@@ -41,6 +41,7 @@ list(df.columns)
 ```
 
 ## EDA
+    Simplemente se arreglaran datos, eliminacion de datos faltantes
 ```{python}
 
 # Variables
@@ -48,16 +49,14 @@ X = df[['Anio', 'Total_Docentes', 'Sostenimiento_Fiscal', 'Area_Rural']]  # por 
 y = df['Total_Estudiantes']
 
 # Modelo
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-modelo = LinearRegression()
-modelo.fit(X_train, y_train)
 
-# Predicción
-preds = modelo.predict(X_test)
 ```
 
 
 ## Split, Pipeline y fit
+
+    Usaremos el train split para dividir el conjunto de datos 
+     luego crearemos el pipeline con el escalado y la funcion de Regresion lineal, y luego usaremos fit del pipeline con los datos separados
 ```{python}
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
@@ -82,6 +81,8 @@ y_pred_pipe = pipe.predict(X_test)
 ```
 
  ### Evaluacion
+    Probaremos este modelo con estas 3 valores de evaluacion 
+
 ```{python}
 
 rmse = mean_squared_error(y_test, y_pred_pipe)**0.5
@@ -94,9 +95,12 @@ print("R²:", r2)
 
 ```
 
-Graficos
+## Graficos
 
+Aqui realizaremos algunos graficos de este modelo para poder aprenciar el trabajo, y como esta funcionando el modelo a comparacion de la realidad
 ```{python}
+import numpy as np
+
 alt.data_transformers.disable_max_rows()
 
 df_vp = pd.DataFrame({
@@ -149,15 +153,28 @@ histograma = alt.Chart(df_errores).mark_bar().encode(
     height=300,
     title='Distribución de Errores'
 )
-```
 
+
+
+
+
+
+
+
+
+```
 
 ```{python}
 histograma
 ```
 
-
 ```{python}
 scatter_plot
 ```
+
+
+### Resultados
+
+El modelo  explica bin la varianza de los datos, Los datos de RMSE indican valores bajos entre las predicciones y valores reales, lo que se puede apreciar los graficos especialmente en el scatter plot
+
 ### Yachay Tech

@@ -14,7 +14,7 @@
         "        embed-resources: true\n",
         "---\n"
       ],
-      "id": "91561c1f"
+      "id": "111890fe"
     },
     {
       "cell_type": "code",
@@ -32,7 +32,7 @@
         "import warnings\n",
         "warnings.filterwarnings('ignore')"
       ],
-      "id": "6c18e624",
+      "id": "b601380f",
       "execution_count": null,
       "outputs": []
     },
@@ -42,7 +42,7 @@
       "source": [
         "## Carga de dataset\n"
       ],
-      "id": "85f94b10"
+      "id": "8a5726f8"
     },
     {
       "cell_type": "code",
@@ -64,7 +64,7 @@
         "\n",
         "print(f\"Total de registros: {len(df)}\")"
       ],
-      "id": "938bf64d",
+      "id": "352240b0",
       "execution_count": null,
       "outputs": []
     },
@@ -74,7 +74,7 @@
       "source": [
         "## Variable objetivo\n"
       ],
-      "id": "dd178db2"
+      "id": "5da20bcb"
     },
     {
       "cell_type": "code",
@@ -94,7 +94,7 @@
         "print(f\"Con costo (1): {dist.get(1, 0):3d} canchas ({dist.get(1, 0)/total*100:5.2f}%)\")\n",
         "print(f\"\\nDesbalanceo de clases: {dist.get(0, 0)/dist.get(1, 0):.2f}:1\")"
       ],
-      "id": "54a81d71",
+      "id": "4630460d",
       "execution_count": null,
       "outputs": []
     },
@@ -104,7 +104,7 @@
       "source": [
         "## Seleccion de features\n"
       ],
-      "id": "e7d52466"
+      "id": "c07d4540"
     },
     {
       "cell_type": "code",
@@ -142,7 +142,7 @@
         "    n_unique = df[feat].nunique()\n",
         "    print(f\"{i}. {feat}: {n_unique} categorías\")"
       ],
-      "id": "81557887",
+      "id": "c6c41f4d",
       "execution_count": null,
       "outputs": []
     },
@@ -152,7 +152,7 @@
       "source": [
         "## Preparar datos\n"
       ],
-      "id": "3a25fb89"
+      "id": "3930ca88"
     },
     {
       "cell_type": "code",
@@ -190,7 +190,7 @@
         "print(f\"Train: {len(X_train)} muestras (Gratis: {(y_train==0).sum()}, Con costo: {(y_train==1).sum()})\")\n",
         "print(f\"Test:  {len(X_test)} muestras (Gratis: {(y_test==0).sum()}, Con costo: {(y_test==1).sum()})\")\n"
       ],
-      "id": "3a67d29d",
+      "id": "bad56b78",
       "execution_count": null,
       "outputs": []
     },
@@ -200,7 +200,7 @@
       "source": [
         "## Pipeline\n"
       ],
-      "id": "a013d858"
+      "id": "1f2523b6"
     },
     {
       "cell_type": "code",
@@ -224,7 +224,7 @@
         "pipe.fit(X_train, y_train)\n",
         "print(\"✓ Modelo entrenado exitosamente\\n\")"
       ],
-      "id": "f0560094",
+      "id": "2a7c97f4",
       "execution_count": null,
       "outputs": []
     },
@@ -234,7 +234,7 @@
       "source": [
         "## Predicciones\n"
       ],
-      "id": "4fb7fb2b"
+      "id": "16980316"
     },
     {
       "cell_type": "code",
@@ -244,7 +244,7 @@
         "y_pred_train = pipe.predict(X_train)\n",
         "y_pred_test = pipe.predict(X_test)\n"
       ],
-      "id": "6cbe46ab",
+      "id": "44c6ef92",
       "execution_count": null,
       "outputs": []
     },
@@ -254,7 +254,7 @@
       "source": [
         "## Evaluacion\n"
       ],
-      "id": "0d56c4fd"
+      "id": "ae4472eb"
     },
     {
       "cell_type": "code",
@@ -273,7 +273,7 @@
         "print(f\"Recall:    {rec_train:.4f} ({rec_train*100:.2f}%)\")\n",
         "print(f\"F1-Score:  {f1_train:.4f} ({f1_train*100:.2f}%)\")"
       ],
-      "id": "38a66f68",
+      "id": "e83c2559",
       "execution_count": null,
       "outputs": []
     },
@@ -283,7 +283,7 @@
       "source": [
         "## Evaluacion\n"
       ],
-      "id": "a682fe34"
+      "id": "38ad22d5"
     },
     {
       "cell_type": "code",
@@ -298,7 +298,7 @@
         "rec_test = recall_score(y_test, y_pred_test, zero_division=0)\n",
         "f1_test = f1_score(y_test, y_pred_test, zero_division=0)"
       ],
-      "id": "b0d44780",
+      "id": "14706776",
       "execution_count": null,
       "outputs": []
     },
@@ -308,7 +308,7 @@
       "source": [
         "## Evaluacion del modelo\n"
       ],
-      "id": "37ffe314"
+      "id": "ca794fc7"
     },
     {
       "cell_type": "code",
@@ -316,7 +316,7 @@
       "source": [
         "diferencia = abs(acc_train - acc_test)"
       ],
-      "id": "a86beb59",
+      "id": "b6b38c96",
       "execution_count": null,
       "outputs": []
     },
@@ -324,18 +324,18 @@
       "cell_type": "markdown",
       "metadata": {},
       "source": [
-        "## Visualizaciones\n"
+        "## Visualizaciones\n",
+        "Visualizaremos la matriz de confucion"
       ],
-      "id": "9960f361"
+      "id": "3a3d89a4"
     },
     {
       "cell_type": "code",
       "metadata": {},
       "source": [
-        "# 12. VISUALIZACIONES\n",
         "fig, axes = plt.subplots(1, 2, figsize=(14, 5))\n",
         "\n",
-        "# Matriz de confusión\n",
+        "\n",
         "ConfusionMatrixDisplay.from_predictions(\n",
         "    y_test, y_pred_test,\n",
         "    display_labels=['Gratis', 'Con Costo'],\n",
@@ -373,9 +373,18 @@
         "plt.tight_layout()\n",
         "plt.show()\n"
       ],
-      "id": "54ec3770",
+      "id": "ba5acf0a",
       "execution_count": null,
       "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### ROC, DISTRIBUCION DE CLASES Y  CURVA (GRAFICAS)\n",
+        "    Se usara altair para es despliegue de estas graficas"
+      ],
+      "id": "0b5bf1e5"
     },
     {
       "cell_type": "code",
@@ -383,17 +392,15 @@
       "source": [
         "from sklearn.metrics import roc_curve, auc\n",
         "\n",
-        "\n",
-        "# Obtener probabilidades para la curva ROC\n",
         "y_proba_test = pipe.predict_proba(X_test)[:, 1]\n",
         "\n",
-        "# Calcular curva ROC\n",
+        "\n",
         "fpr, tpr, thresholds = roc_curve(y_test, y_proba_test)\n",
         "roc_auc = auc(fpr, tpr)\n",
         "\n",
         "\n",
         "fig, axes = plt.subplots(1, 2, figsize=(14, 5))\n",
-        "# GRÁFICA 1: Distribución de clases\n",
+        "\n",
         "ax1 = axes[0]\n",
         "clases = ['Gratis (0)', 'Con Costo (1)']\n",
         "valores = [dist.get(0, 0), dist.get(1, 0)]\n",
@@ -404,20 +411,17 @@
         "ax1.set_title('Distribución de Clases en el Dataset', fontsize=12, fontweight='bold')\n",
         "ax1.grid(axis='y', alpha=0.3, linestyle='--')\n",
         "\n",
-        "# Agregar valores en las barras\n",
         "for bar, val in zip(bars, valores):\n",
         "    height = bar.get_height()\n",
         "    ax1.text(bar.get_x() + bar.get_width()/2., height,\n",
         "            f'{val}\\n({val/total*100:.1f}%)',\n",
         "            ha='center', va='bottom', fontsize=10, fontweight='bold')\n",
         "\n",
-        "# Agregar línea de desbalanceo\n",
         "ratio = dist.get(0, 0) / dist.get(1, 0)\n",
         "ax1.text(0.5, max(valores)*0.9, f'Ratio de desbalanceo: {ratio:.1f}:1', \n",
         "         ha='center', fontsize=10, style='italic',\n",
         "         bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))\n",
         "\n",
-        "# GRÁFICA 2: Curva ROC\n",
         "ax2 = axes[1]\n",
         "ax2.plot(fpr, tpr, color='#2ecc71', linewidth=2, label=f'ROC (AUC = {roc_auc:.3f})')\n",
         "ax2.plot([0, 1], [0, 1], color='gray', linestyle='--', linewidth=1.5, label='Azar (AUC = 0.500)')\n",
@@ -429,10 +433,9 @@
         "ax2.legend(loc='lower right', fontsize=10)\n",
         "ax2.grid(alpha=0.3, linestyle='--')\n",
         "\n",
-        "# Sombrear área bajo la curva\n",
         "ax2.fill_between(fpr, tpr, alpha=0.2, color='#2ecc71')"
       ],
-      "id": "71faa26a",
+      "id": "ba8c1118",
       "execution_count": null,
       "outputs": []
     },
@@ -440,9 +443,9 @@
       "cell_type": "markdown",
       "metadata": {},
       "source": [
-        "### Se puede observar como la canchas publicas tienen al mayor cantidad a diferencia de canchas con costo; los resultados reflejan la realidad. "
+        "### Se puede observar como la canchas publicas tienen al mayor cantidad a diferencia de canchas con costo; los resultados reflejan la realidad, una mejor cantidad de datos nos podrian ser util para mejorar el modelo. "
       ],
-      "id": "a09816f1"
+      "id": "7e5fcd77"
     }
   ],
   "metadata": {
